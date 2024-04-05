@@ -1,13 +1,15 @@
 {
   "name": "minisearch-synonyms",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Use MiniSearch with synonyms",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "vitest",
     "coverage": "vitest --coverage",
-    "build": "tsc",
+    "build": "tsup src/index.ts --format cjs,esm --dts",
     "prepublishOnly": "npm run build"
   },
   "repository": {
@@ -28,6 +30,7 @@
   "devDependencies": {
     "@vitest/coverage-v8": "^1.4.0",
     "minisearch": "^6.3.0",
+    "tsup": "^8.0.2",
     "typescript": "^5.4.3",
     "vitest": "^1.4.0"
   }
