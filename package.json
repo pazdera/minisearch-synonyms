@@ -2,6 +2,7 @@
   "name": "minisearch-synonyms",
   "version": "0.0.1",
   "description": "Use MiniSearch with synonyms",
+  "type": "module",
   "main": "src/index.ts",
   "scripts": {
     "test": "vitest",
