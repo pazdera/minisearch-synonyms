@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "description": "Use MiniSearch with synonyms",
   "type": "module",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "test": "vitest",
     "coverage": "vitest --coverage",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
