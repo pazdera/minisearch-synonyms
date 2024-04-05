@@ -1,5 +1,5 @@
 import MiniSearch from 'minisearch';
-import { MiniSearchSynonyms } from '../src';
+import MiniSearchSynonyms from '../src';
 import { test, expect } from 'vitest';
 
 const documents = [
