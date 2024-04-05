@@ -26,7 +26,7 @@ export class MiniSearchSynonyms {
         throw new Error(`Word \`${word}\` cannot be in multiple groups`);
       }
 
-      if (uniqueWords.includes(word)) {
+      if (uniqueWords.find(w => w === word)) {
         throw new Error(`Duplicate synonym: \`${word}\``);
       }
       uniqueWords.push(word);
@@ -42,7 +42,7 @@ export class MiniSearchSynonyms {
 
   removeSynonyms(word: string) {
     const lowerCaseWord = word.toLowerCase();
-    const groupIndex = this.groups.findIndex(group => group.includes(lowerCaseWord));
+    const groupIndex = this.groups.findIndex(group => group.find(w => w === lowerCaseWord));
 
     if (groupIndex >= 0) {
       const group = this.groups[groupIndex];
@@ -65,7 +65,7 @@ export class MiniSearchSynonyms {
       return query;
     }
 
-    const tokens = tokenize(query, this.groups.flat());
+    const tokens = tokenize(query, [...this.wordmap.keys()]);
     const synonymOptions: { [index: string]: string[] } = {};
 
     for (let i = 0; i < tokens.length; i++) {
@@ -99,7 +99,7 @@ export class MiniSearchSynonyms {
     };
   }
 
-  private generateKeywordCombinations(synonymOptions: { [index: string]: string[] }, combinations: { [index: string]: string }[]) {
+  private generateKeywordCombinations(synonymOptions: { [index: string]: string[] }, combinations: { [index: string]: string }[]): { [index: string]: string }[]{
     const keys = Object.keys(synonymOptions);
     if (keys.length === 0) {
       return combinations;
@@ -120,7 +120,9 @@ export class MiniSearchSynonyms {
       }
     }
 
-    const remainingOptions = Object.fromEntries(Object.entries(synonymOptions).filter(([k]) => k !== key));
+    const remainingOptions = { ...synonymOptions };
+    delete remainingOptions[key];
+
     return this.generateKeywordCombinations(remainingOptions, newCombinations);
   }
 }
