@@ -1,6 +1,6 @@
 {
   "name": "minisearch-synonyms",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Use MiniSearch with synonyms",
   "type": "module",
   "main": "dist/index.cjs",
