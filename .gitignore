@@ -133,4 +133,4 @@ dist
 .DS_Store
 
 # Coverage
-coverage
+coverage/

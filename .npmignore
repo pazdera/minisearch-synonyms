@@ -1,0 +1,7 @@
+.vscode
+.github
+src/**/*.test.ts
+test
+coverage
+tsconfig.json
+vitest.config.mts
