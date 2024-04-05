@@ -6,7 +6,8 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "vitest",
-    "coverage": "vitest --coverage"
+    "coverage": "vitest --coverage",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
