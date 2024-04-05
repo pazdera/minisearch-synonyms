@@ -30,18 +30,18 @@ export function tokenize(query: string, synonyms: string[]) {
           type: 'synonym',
           position: pos,
           length: foundWord.length,
-          value: query.slice(pos, pos + foundWord.length),
+          value: remaining.slice(0, foundWord.length)
         };
         forward = foundWord.length;
       } else if (remaining[0].match(SPACE_OR_PUNCTUATION)) {
         state.length += 1;
-        state.value += query[pos];
+        state.value += remaining[0];
       } else {
         newState = {
           type: 'word',
           position: pos,
           length: 1,
-          value: query[pos],
+          value: remaining[0],
         };
       }
     } else if (state.type === 'synonym') {
@@ -50,24 +50,22 @@ export function tokenize(query: string, synonyms: string[]) {
           type: 'separator' as const,
           position: pos,
           length: 1,
-          value: query[pos],
+          value: remaining[0],
         };
       } else {
         const otherSynonyms = synonyms.filter(synonym => synonym !== state.value.toLowerCase());
-        console.log('otherSynonyms', remaining, otherSynonyms);
         const previousRemaining = state.value.toLowerCase() + remaining;
         const match = otherSynonyms.find(synonym => previousRemaining.startsWith(synonym));
-        console.log('match', match);
+
         if (match) {
           forward = match.length - state.length;
           state.length = match.length;
-          state.value = query.slice(state.position, state.position + match.length);
+          state.value = match;
         } else {
           state.type = 'word';
           state.length += 1;
-          state.value += query[pos];
+          state.value += remaining[0];
         }
-        console.log('state', state);
       }
     } else { /* state.type === 'word' */
       if (remaining[0].match(SPACE_OR_PUNCTUATION)) {
@@ -75,11 +73,11 @@ export function tokenize(query: string, synonyms: string[]) {
           type: 'separator' as const,
           position: pos,
           length: 1,
-          value: query[pos],
+          value: remaining[0],
         };
       } else {
         state.length += 1;
-        state.value += query[pos];
+        state.value += remaining[0];
       }
     }
 
