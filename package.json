@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/pazdera/minisearch-synonyms#readme",
   "devDependencies": {
+    "@vitest/coverage-v8": "^1.4.0",
     "minisearch": "^6.3.0",
     "typescript": "^5.4.3",
     "vitest": "^1.4.0"
