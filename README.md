@@ -53,11 +53,47 @@ When searching, pass your query through the `expandQuery` method:
 ```typescript
 const query = 'blue car';
 const queryWithSynonyms = synonyms.expandQuery(query);
+// => {
+//   combineWith: 'OR',
+//   queries: [
+//     'blue car',
+//     'blue auto',
+//     'blue automobile',
+//     'blue vehicle'
+//   ],
+// }
 
 const results = miniSearch.search(queryWithSynonyms);
 ```
 
-## How It Works
+You can add synonyms at any time:
+
+```typescript
+synonyms.addSynonyms(['blue', 'azure', 'navy']);
+```
+
+Use the `removeSynonyms` method to remove entire groups of synonyms:
+
+```typescript
+synonyms.removeSynonyms('car');
+// => removes the entire group of synonyms that includes 'car'
+```
+
+MiniSearchSynonyms supports multiple terms separated by whitespace or punctuation:
+
+```typescript
+synonyms.addSynonyms(['ai', 'artificial intelligence']);
+
+const query = 'the dangers of ai';
+const queryWithSynonyms = synonyms.expandQuery(query);
+// => {
+//   combineWith: 'OR',
+//   queries: [
+//     'the dangers of ai',
+//     'the dangers of artificial intelligence',
+//   ],
+// }
+```
 
 ## License
 
