@@ -9,7 +9,9 @@
   "scripts": {
     "test": "vitest",
     "coverage": "vitest --coverage",
-    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "build-node": "tsup src/index.ts --format cjs,esm --dts",
+    "build-browser": "tsup src/index.ts --format iife --platform browser --global-name MiniSearchSynonyms --minify",
+    "build": "npm run build-node && npm run build-browser",
     "prepublishOnly": "npm run build"
   },
   "repository": {
