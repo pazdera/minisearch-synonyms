@@ -1,7 +1,7 @@
 {
   "name": "minisearch-synonyms",
-  "version": "1.0.0",
-  "description": "Add synonyms to MiniSearch",
+  "version": "0.0.1",
+  "description": "Use MiniSearch with synonyms",
   "main": "src/index.ts",
   "scripts": {
     "test": "vitest",
