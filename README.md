@@ -22,11 +22,43 @@ Using `yarn`:
 yarn add minisearch-synonyms
 ```
 
-Install `minisearch` as described in the [MiniSearch docs](https://github.com/lucaong/minisearch#installation).
+You can also access the package via a CDN:
+
+```html
+<script src="https://www.unpkg.com/minisearch-synonyms@latest/dist/index.global.js"></script>
+```
+
+Remember install `minisearch` as described in the [MiniSearch docs](https://github.com/lucaong/minisearch#installation).
 
 ## Usage
 
+Import `minisearch-synonyms` alongside `minisearch`:
+
 ```typescript
 import MiniSearch from 'minisearch';
-import { }
+import MiniSearchSynonyms from 'minisearch-synonyms';
 ```
+
+Create an instance of `MiniSearchSynonyms` and define your synonyms:
+
+```typescript
+const synonyms = new MiniSearchSynonyms([
+  ['car', 'auto', 'automobile', 'vehicle'],
+  ['bike', 'bicycle']
+]);
+```
+
+When searching, pass your query through the `expandQuery` method:
+
+```typescript
+const query = 'blue car';
+const queryWithSynonyms = synonyms.expandQuery(query);
+
+const results = miniSearch.search(queryWithSynonyms);
+```
+
+## How It Works
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
