@@ -124,3 +124,5 @@ export class MiniSearchSynonyms {
     return this.generateKeywordCombinations(remainingOptions, newCombinations);
   }
 }
+
+export default MiniSearchSynonyms;
